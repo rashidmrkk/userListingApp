@@ -1,6 +1,5 @@
 // import logo from './logo.svg';
 // import './App.css';
-import routes from "./routes";
 import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import Login from "./Views/Login";
 import Dashboard from "./Views/Dashboard";
@@ -11,26 +10,7 @@ import AddNewUser from "./Views/AddNewUser";
 function App() {
   return (
     <div>
-      {/* <Router >
-        {
-          routes.map((route, index) => {
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={(props => {
-                  return (
-                    // <route.layout {...props}>
-                      <route.component {...props} />
-                    // </route.layout>
-                  );
-                })}
-              />
-            );
-          })
-        }
-      </Router> */}
+      
       <Router          >
           <Switch>
             <Route exact path="/" component={Login} />
@@ -45,28 +25,3 @@ function App() {
 
 export default App;
 
-
-
-
-// export default () => (
-//   <Router >
-//     {
-//       routes.map((route, index) => {
-//         return (
-//           <Route
-//             key={index}
-//             path={route.path}
-//             exact={route.exact}
-//             component={(props => {
-//               return (
-//                 <route.layout {...props}>
-//                   <route.component {...props} />
-//                 </route.layout>
-//               );
-//             })}
-//           />
-//         );
-//       })
-//     }
-//   </Router>
-// );
