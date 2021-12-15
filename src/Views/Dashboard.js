@@ -57,8 +57,10 @@ function Dashboard() {
                                 <TableCell component="th" scope="row">
                                     <Grid container spacing={2}>
                                         <Grid item lg={2} container>
+                                            {user.user.picture &&
                                             <Avatar src={user.user.picture.thumbnail} alt={user.user.username} />
-                                        </Grid>
+                                            }
+                                            </Grid>
                                         <Grid container item lg={10}>
                                             {user.user.name.first}
                                         </Grid>

@@ -35,7 +35,10 @@ const useStyles = makeStyles(() => ({
     }
 
 }))
+const users = JSON.parse(localStorage.getItem('users'))
 function AddNewUser(props) {
+    const [Loading, setLoading] = useState(false)
+
     const [UserName, setUserName] = useState("")
     const [Gender, setGender] = useState("Male")
     const [errors, setErrors] = useState({})
@@ -48,50 +51,64 @@ function AddNewUser(props) {
     const [Dob, setDob] = useState("")
     const [Phone, setPhone] = useState("")
     const classes = useStyles()
-    const validate = () =>{
-        if(!UserName){
-            setErrors({username:"Username is missing"})
+    const validate = () => {
+
+        if (!UserName) {
+
+            setErrors({ username: "Username is missing" })
+
         }
-        if(!Password){
-            setErrors({password:"Password is missing"})
+        if (UserName) {
+            console.log("sbdhjsbjhfbnds");
+            const dd = users.filter(user => user.user.username === UserName)
+            if (dd.length > 0) {
+                console.log("kkk");
+                setErrors({ username: "Username already present" })
+            }
         }
-        if(!Email){
-            setErrors({email:"Email is missing"})
+        if (!Password) {
+            setErrors({ password: "Password is missing" })
         }
-        if(!FirstName){
-            setErrors({firstName:"FirstName is missing"})
+        if (!Email) {
+            setErrors({ email: "Email is missing" })
         }
-        if(!Dob){
-            setErrors({dob:"Dob is missing"})
+        if (!FirstName) {
+            setErrors({ firstName: "FirstName is missing" })
         }
-        if(!Phone){
-            setErrors({phone:"Phone is missing"})
+        if (!Dob) {
+            setErrors({ dob: "Dob is missing" })
+        }
+        if (!Phone) {
+            setErrors({ phone: "Phone is missing" })
         }
         return errors;
     }
-    const handleSubmit=()=>{
-      const errors =  validate()
-        if(!errors){
-
-        }
-        else{
-            console.log("yyyyyy");
+    const handleSubmit = () => {
+        setErrors({})
+        const errors = validate()
+        if (Object.keys(errors).length === 0) {
+            console.log("iii");
             props.addUser({
-                user:{
-                    email:Email,
-                    name:{
-                        title:Title,
-                        first:FirstName,
-                        last:LastName
+                user: {
+                    email: Email,
+                    name: {
+                        title: Title,
+                        first: FirstName,
+                        last: LastName
                     },
-                    username:UserName,
-                    phone:Phone,
-                    gender:Gender,
-                    password:Password,
-                    dob:Dob
+                    username: UserName,
+                    phone: Phone,
+                    gender: Gender,
+                    password: Password,
+                    dob: Dob
                 }
             })
+            window.alert("User added successfully!")
         }
+        else {
+            console.log("kk");
+        }
+
     }
     return (
         <Grid container className={classes.root}>
@@ -276,11 +293,11 @@ function AddNewUser(props) {
                                 onChange={(e) => setDob(e.target.value)}
                             />
                         </Grid>
-                        <Grid item  container>
-                                <Button variant="contained" color="primary" onClick={handleSubmit}>
-                                    Save
-                                </Button>
-                            </Grid>
+                        <Grid item container>
+                            <Button variant="contained" color="primary" onClick={handleSubmit}>
+                                Save
+                            </Button>
+                        </Grid>
                     </Grid>
 
                 </Grid>
